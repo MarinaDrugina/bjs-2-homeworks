@@ -19,8 +19,7 @@ function getArrayParams(arr) {
     sum += arr[i];
   }
 
-  avg = sum / arr.length;
-  avg = Number(avg.toFixed(2));
+  avg = Number((sum / arr.length).toFixed(2));
 
   return { min: min, max: max, avg: avg };
 }
@@ -42,8 +41,10 @@ function makeWork(arrOfArr, func) {
 
   for (let i = 0; i < arrOfArr.length; i++) {
 
-    if(func(arrOfArr[i]) > max) {
-      max = func(arrOfArr[i]);
+    const funcResult = func(arrOfArr[i]);
+    
+    if (funcResult > max) {
+      max = funcResult;
     }
   }
   
@@ -67,21 +68,7 @@ function worker2(arr) {
     }
   }
 
-  r = max - min;
-  r = Math.abs(r);
+  r = Math.abs(max - min);
 
   return r;
-}
-
-function makeWork(arrOfArr, func) {
-  let max = -Infinity;
-
-  for (let i = 0; i < arrOfArr.length; i++) {
-
-    if(func(arrOfArr[i]) > max) {
-      max = func(arrOfArr[i]);
-    }
-  }
-  
-  return max;
 }
