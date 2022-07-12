@@ -3,15 +3,13 @@
 function solveEquation(a, b, c) {
   let arr = [];
 
-  let D;
-  D = Math.pow(b, 2) - 4*a*c;
+  let d;
+  d = Math.pow(b, 2) - 4*a*c;
   
-  if (D < 0) {
-    arr = [];
-  } else if (D === 0) {
+  if (d === 0) {
     arr = [-b / (2*a)];
-  } else if (D > 0) {
-    arr = [(-b + Math.sqrt(D)) / (2*a), (-b - Math.sqrt(D)) / (2*a)];
+  } else if (d > 0) {
+    arr = [(-b + Math.sqrt(d)) / (2*a), (-b - Math.sqrt(d)) / (2*a)];
   }
 
   return arr; // array
@@ -28,7 +26,7 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
     return `Параметр "Начальный взнос" содержит неправильное значение "${contribution}"`;
   } else if (isNaN(+amount)) {
     return `Параметр "Общая стоимость" содержит неправильное значение "${amount}"`;
-  } else {
+  }
   
   let primaryLoan = amount - contribution;
   
@@ -41,5 +39,4 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
   totalAmount = Math.round((payment * dateAll) * 100) / 100;
   
   return totalAmount;
-  }
 }
