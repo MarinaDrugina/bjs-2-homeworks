@@ -96,48 +96,51 @@ class PrintEditionItem {
   }
 
 
-class Student {
+
+  class Student {
     constructor(name, gender, age) {
-        this.name = name;
-        this.gender = gender;
-        this.age = age;
-        this.journal = [];
-    }
+      this.name = name;
+      this.gender = gender;
+      this.age = age;
+      this.journal = [];
+      }
   
     addMark(mark, subjectName) {
-        //let getObject = Object.assign({}, this.journal);
-        let res = Object.keys(this.journal).find(item => item === subjectName);
-    
-        if (((this.journal.length === 0) && (mark > 0 && mark < 6)) || ((this.journal.length > 0) && (mark > 0 && mark < 6) && (res !== subjectName))) {
-            this.journal.push({[subjectName]: [mark]});
-            return this.journal;
-          } else if ((this.journal.length > 0) && (mark > 0 && mark < 6) && (res === subjectName)) {
-            this.journal.res.push(mark);
-            return this.journal;
-          } else {
-            return "Ошибка, оценка должна быть числом от 1 до 5";
-          }   
-    }
-
-    getAverageBySubject(subjectName) {
-        let index;
-        
-        if((index = Object.keys(this.journal).findIndex(item => item === subjectName)) !== -1) {
-          return this.journal[index][subjectName].reduce((a,b) => (a + b)) / this.journal[index][subjectName].length;
+      let index = this.journal.findIndex(item => item.subject === subjectName);
+  
+      if(mark > 0 && mark < 6) {
+        if(this.journal.length === 0 || index === -1){
+          return this.journal.push({subject: subjectName, mark: [mark]});
         } else {
-          return 'Несуществующий предмет';
+          return this.journal[index].mark.push(mark);
         }
+      } else {
+        return 'Ошибка, оценка должна быть числом от 1 до 5';
+      }
     }
-
+  
+    getAverageBySubject(subjectName) {
+      let index = this.journal.findIndex(item => item.subject === subjectName);
+    
+      if(index === -1){
+        return "Несуществующий предмет";
+      } else {
+        return this.journal[index].mark.reduce((a,b) => (a + b) / this.journal[index].mark.length);
+      }
+    }
+  
     getAverage(){
-        let getObject = Object.assign({}, this.journal);
-        let getMarks = Object.values(getObject);
-
-        return getMarks.reduce((a,b) => (a + b)) / getMarks.length;
+      let sum = 0;
+      let average = 0;
+      
+      for(let i = 0; i < this.journal.length; i++){
+        sum += this.journal[i].mark.reduce((a,b) => (a + b) / this.journal[i].mark.length)
+      }
+      return average += sum / this.journal.length;
     }
-
+  
     exclude(reason) {
-        delete this.journal;
-        this.excluded = reason;
+      delete this.journal;
+      return this.excluded = reason;
     }
-}
+  }
