@@ -28,11 +28,11 @@ class Triangle {
     }
 
     getPerimeter() {
-        return this.perimeter = this.sideA + this.sideB + this.sideC;
+        return this.sideA + this.sideB + this.sideC;
     }
 
     getArea() {
-        const p = this.perimeter * 0.5;
+        const p = (this.sideA + this.sideB + this.sideC) * 0.5;
         this.square = Math.sqrt(p * (p - this.sideA) * (p - this.sideB) * (p - this.sideC));
 
         return +this.square.toFixed(3);
